@@ -31,24 +31,24 @@
 
 		<meta
 			name="keywords"
-			content="Mega-Sena, sorteio, números, loteria, prêmio, gerador de números, bolão, Mega Sena"
+			content="Mega-Sena, sorteio, números, loteria, prêmio, gerador de números, bolão, Mega Sena, Mega Sena da Virada"
 		/>
 
 		<meta name="author" content="Números da Mega Sena - Gerador de números" />
 
 		<meta
 			property="og:title"
-			content="Chega de indecisão com os números do seu bolão! Use gerador de números da Mega Sena e faça sua fé e boa sorte!"
+			content="Números Mega! O melhor gerador de números para a Mega-Sena"
 		/>
 		<meta
 			property="og:description"
 			content="Chega de indecisão com os números do seu bolão! Use gerador de números da Mega Sena e faça sua fé e boa sorte!"
 		/>
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://www.seudominio.com/" />
+		<meta property="og:url" content="https://numerosmega.com.br/" />
 		<meta
 			property="og:image"
-			content="https://www.seudominio.com/img/mega-sena.jpg"
+			content="https://numerosmega.com.br/assets/banner.png"
 		/>
 
 		<meta name="twitter:card" content="summary_large_image" />
@@ -62,37 +62,51 @@
 		/>
 		<meta
 			name="twitter:image"
-			content="https://www.seudominio.com/img/mega-sena.jpg"
+			content="https://numerosmega.com.br/assets/banner.png"
 		/>
 
 		<link href="css/style.css" rel="stylesheet" />
 	</head>
 	<body>
 		<header id="cabecalho">
-			<h1>O que você faria se ganhasse na Mega-Sena?</h1>
+			<img src="./assets/banner.png" alt="Números Mega" />
+			<section id="introducao">
+				<h1>O que você faria se ganhasse na Mega-Sena?</h1>
+				<p>
+					Compraria uma casa? Ajudaria parentes? Ou sairia viajando pelo
+					mundo?
+				</p>
+				<p>
+					<strong> Todo mundo tem o sonho de ganhar na Mega-Sena! </strong>
+				</p>
+				<p>
+					Estamos aqui para dar um empurrãozinho na sua fé e ajudar a
+					escolher seus números que vão fazer a diferença na sua vida
+				</p>
+			</section>
 		</header>
 
 		<main id="main">
 			<article class="gerador">
-				<h2>Gere suas dezenas</h2>
+				<h2>Utilize nosso gerador de dezenas e boa sorte!</h2>
+				<div class="numeros">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+				</div>
+				<button id="sortear">Sortear números</button>
+				<button id="novosNumeros" style="display: none">
+					Gerar novas dezenas
+				</button>
 			</article>
 		</main>
 
-		<aside class="sidebar" id="left">
-			<h2>Mais sobre a Mega-Sena</h2>
-			<p>
-				Aprenda estratégias, veja estatísticas de números sorteados e
-				aumente suas chances de ganhar!
-			</p>
-		</aside>
+		<aside class="sidebar" id="left"></aside>
 
-		<aside class="sidebar" id="right">
-			<h2>Dicas de Investimento</h2>
-			<p>
-				Ganhou na Mega-Sena? Descubra como investir o prêmio para garantir
-				sua liberdade financeira!
-			</p>
-		</aside>
+		<aside class="sidebar" id="right"></aside>
 
 		<footer id="rodape">
 			<nav>
@@ -100,5 +114,69 @@
 				<a target="_blank" href="https://gocasimiro.com">gocasimiro</a>
 			</nav>
 		</footer>
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<p id="modal-message"></p>
+			</div>
+		</div>
 	</body>
 </html>
+
+<script>
+	const numeros = document.querySelectorAll('.numeros span')
+	const sortearButton = document.querySelector('#sortear')
+	const novosNumerosButton = document.querySelector('#novosNumeros')
+	let isNumbersGenerated = false
+
+	numeros.forEach((numero) => {
+		numero.style.display = 'none'
+	})
+
+	function generateNumbers() {
+		const generatedNumbers = new Set()
+		while (generatedNumbers.size < 6) {
+			generatedNumbers.add(Math.floor(Math.random() * 60 + 1))
+		}
+		const numbersArray = Array.from(generatedNumbers)
+		numeros.forEach((numero, index) => {
+			numero.innerText = numbersArray[index]
+			numero.style.display = 'block'
+		})
+	}
+
+	const modal = document.getElementById('modal')
+	const modalMessage = document.getElementById('modal-message')
+	const closeModal = document.querySelector('.close')
+
+	closeModal.addEventListener('click', () => {
+		modal.style.display = 'none'
+	})
+
+	window.onclick = (event) => {
+		if (event.target == modal) {
+			modal.style.display = 'none'
+		}
+	}
+
+	sortearButton.addEventListener('click', () => {
+		if (!isNumbersGenerated) {
+			generateNumbers()
+			sortearButton.innerText = 'Copiar números'
+			novosNumerosButton.style.display = 'block'
+			isNumbersGenerated = true
+		} else {
+			const numbersText = Array.from(numeros)
+				.map((numero) => numero.innerText)
+				.join(', ')
+			navigator.clipboard.writeText(numbersText).then(() => {
+				modalMessage.innerText = `Números copiados para o clipboard: ${numbersText}. Obrigado por usar nosso gerador de números e boa sorte!`
+				modal.style.display = 'block'
+			})
+		}
+	})
+
+	novosNumerosButton.addEventListener('click', () => {
+		generateNumbers()
+	})
+</script>
