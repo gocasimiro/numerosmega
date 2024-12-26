@@ -146,12 +146,7 @@
 							alt="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
 							title="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
 						/>
-						<button
-							id="copiarPix"
-							onclick="navigator.clipboard.writeText('00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457')"
-						>
-							Copiar chave PIX
-						</button>
+						<button id="copiarPix">Copiar chave PIX</button>
 					</div>
 				</div>
 			</div>
@@ -194,6 +189,15 @@
 			modal.style.display = 'none'
 		}
 	}
+
+	const copiarPixButton = document.getElementById('copiarPix')
+	copiarPixButton.addEventListener('click', () => {
+		const pix =
+			'00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457'
+		navigator.clipboard.writeText(pix)
+		alert(`Chave PIX copiada
+		Muito obrigado pelo apoio!`)
+	})
 
 	sortearButton.addEventListener('click', () => {
 		if (!isNumbersGenerated) {
