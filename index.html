@@ -117,7 +117,43 @@
 		<div id="modal" class="modal">
 			<div class="modal-content">
 				<span class="close">&times;</span>
-				<p id="modal-message"></p>
+				<h1>Tire um print!</h1>
+				<h2>Esse foi o seu palpite</h2>
+				<ul class="numeros-escolhidos">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li>6</li>
+				</ul>
+				<div class="cabecalho-pix">
+					<h2>Se ganhar, lembra da gente!</h2>
+					<p>
+						Vamos ficar absurdamente felizes se alguém ganhar na mega-sena
+						por um projeto nosso
+					</p>
+					<p>
+						Projetos como esse são legais de se fazer e ficamos muito
+						gratos quando vocês usam nossas ferramentas
+					</p>
+					<p class="box">
+						Incentive o nosso trabalho <br />Fortalece a gente com um PIX!
+					</p>
+					<div class="pix">
+						<img
+							src="./assets/pix-qrcode.jpg"
+							alt="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
+							title="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
+						/>
+						<button
+							id="copiarPix"
+							onclick="navigator.clipboard.writeText('00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457')"
+						>
+							Copiar chave PIX
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
@@ -141,12 +177,12 @@
 		const numbersArray = Array.from(generatedNumbers)
 		numeros.forEach((numero, index) => {
 			numero.innerText = numbersArray[index]
-			numero.style.display = 'block'
+			numero.style.display = 'inline-flex'
 		})
 	}
 
 	const modal = document.getElementById('modal')
-	const modalMessage = document.getElementById('modal-message')
+	const numerosModal = document.getElementsByClassName('numeros-escolhidos')[0]
 	const closeModal = document.querySelector('.close')
 
 	closeModal.addEventListener('click', () => {
@@ -163,14 +199,17 @@
 		if (!isNumbersGenerated) {
 			generateNumbers()
 			sortearButton.innerText = 'Copiar números'
-			novosNumerosButton.style.display = 'block'
+			novosNumerosButton.style.display = 'inline-flex'
 			isNumbersGenerated = true
 		} else {
 			const numbersText = Array.from(numeros)
-				.map((numero) => numero.innerText)
-				.join(', ')
-			navigator.clipboard.writeText(numbersText).then(() => {
-				modalMessage.innerText = `Números copiados para o clipboard: ${numbersText}. Obrigado por usar nosso gerador de números e boa sorte!`
+				.map((numero) => `<li>${numero.innerText}</li>`)
+				.join('')
+			const numbersTextForClipboard = numbersText
+				.replace(/<li>/g, '')
+				.replace(/<\/li>/g, ',')
+			navigator.clipboard.writeText(numbersTextForClipboard).then(() => {
+				numerosModal.innerHTML = numbersText
 				modal.style.display = 'block'
 			})
 		}
