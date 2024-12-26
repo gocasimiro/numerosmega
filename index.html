@@ -109,10 +109,9 @@
 		<aside class="sidebar" id="right"></aside>
 
 		<footer id="rodape">
-			<nav>
-				Boa sorte! Feito carinhosamente por
-				<a target="_blank" href="https://gocasimiro.com">gocasimiro</a>
-			</nav>
+			Boa sorte! <br />
+			Feito carinhosamente por
+			<a target="_blank" href="https://gocasimiro.com">gocasimiro</a>
 		</footer>
 		<div id="modal" class="modal">
 			<div class="modal-content">
@@ -141,11 +140,14 @@
 						Incentive o nosso trabalho <br />Fortalece a gente com um PIX!
 					</p>
 					<div class="pix">
-						<img
-							src="./assets/pix-qrcode.jpg"
-							alt="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
-							title="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
-						/>
+						<div>
+							<img
+								src="./assets/pix-qrcode.jpg"
+								alt="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
+								title="Chave PIX: 00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457"
+							/>
+							<small><strong>QR Code Pix</strong></small>
+						</div>
 						<button id="copiarPix">Copiar chave PIX</button>
 					</div>
 				</div>
@@ -195,8 +197,7 @@
 		const pix =
 			'00020126850014BR.GOV.BCB.PIX0111363348108710248Fortalecimento no trabalho - Muito obrigado! gc.520400005303986540520.005802BR5925GUILHERME DE OLIVEIRA CAS6009SAO PAULO622605226qmmwEBXcajzPqVq0dwdCG63044457'
 		navigator.clipboard.writeText(pix)
-		alert(`Chave PIX copiada
-		Muito obrigado pelo apoio!`)
+		alert(`Chave PIX copiada - Muito obrigado pelo apoio!`)
 	})
 
 	sortearButton.addEventListener('click', () => {
